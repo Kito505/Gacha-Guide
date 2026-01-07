@@ -1,545 +1,278 @@
-:root {
-    --header-height: 75px;
-    --header-height2: 50px;
-    
-    /* Colores de Elementos Vibrantes (Estilo Juego) */
-    --color-fusion: #ff4d5080;   /* Rojo Intenso */
-    --color-glacio: #4facfe80;   /* Azul Hielo Brillante */
-    --color-aero: #33d9b280;     /* Verde Viento */
-    --color-electro: #b56afe80;  /* Violeta Neon */
-    --color-espectro: #ffd70080; /* Oro Puro */
-    --color-destruccion: #ff408180; /* O en el juego es 'Havoc', un rosa/rojo oscuro, pero usaremos este magenta fuerte */
-
-    /* Colores de Texto (Estilo Juego) */
-    --color-fusion-text: #ff686a;
-    --color-glacio-text: #71bdff;
-    --color-aero-text: #5eeecc;
-    --color-electro-text: #c387ff;
-    --color-espectro-text: #ffe863;
-    --color-destruccion-text: #ff6699;
-
-    /* Colores de Bordes (Estilo Juego) */
-    --borde-fusion: #ff4d50;   /* Rojo Intenso */
-    --borde-glacio: #4facfe;   /* Azul Hielo Brillante */
-    --borde-aero: #33d9b2;     /* Verde Viento */
-    --borde-electro: #b56afe;  /* Violeta Neon */
-    --borde-espectro: #ffd700; /* Oro Puro */
-    --borde-destruccion: #ff4081; /* O en el juego es 'Havoc', un rosa/rojo oscuro, pero usaremos este magenta fuerte */
-
-    /* Colores de Interfaz */
-    --bg-dark-1: #0a0b0d; /* Fondo más oscuro */
-    --bg-dark-2: #141518; /* Bloques secundarios */
-    --bg-dark-3: #1f2126; /* Menus y Barras */
-    --accent-gold: #cba353; /* Dorado WuWa */
-    --accent-gold-hover: #f3ba49;
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    min-height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-header {
-    flex: 0 0 auto;
-    position: sticky;
-    height: var(--header-height);
-    top: 0;
-    z-index: 1000;
-}
-
-#menu {
-    height: 100%;
-    padding: 10px;
-    background-color: var(--bg-dark-3);
-    border-bottom: 2px solid var(--accent-gold);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#menu-list {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    list-style: none;
-}
-
-#menu-list img {
-    width: 50px;
-    height: auto;
-}
-
-#wuwaicon {
-    border: 3px solid #4baeff;
-    border-radius: 25px;
-    box-shadow: 0 0 15px #45a5ffcc;
-}
-
-#genshinicon {
-    border: 3px solid #7a7a7a;
-    border-radius: 25px;
-    box-shadow: 0 0 0px transparent;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-#genshinicon:hover {
-    border: 3px solid #ffc64b;
-    border-radius: 25px;
-    box-shadow: 0 0 15px #ffc445cc;
-}
-
-#honkaiicon {
-    border: 3px solid #7a7a7a;
-    border-radius: 25px;
-    box-shadow: 0 0 0px transparent;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-#honkaiicon:hover {
-    border: 3px solid #ff4bba;
-    border-radius: 25px;
-    box-shadow: 0 0 15px #ff45e6cc;
-}
-
-#zenlessicon {
-    border: 3px solid #7a7a7a;
-    border-radius: 25px;
-    box-shadow: 0 0 0px transparent;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-#zenlessicon:hover {
-    border: 3px solid #ff8d4b;
-    border-radius: 25px;
-    box-shadow: 0 0 15px #ff8f45cc;
-}
-
-main {
-    flex: 1 1 auto;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: 300px 1fr;
-    grid-template-areas:
-        "barra fondo"
-        "barra centro"
-        "barra footer";
-}
-
-.barra {
-    grid-area: barra;
-    background-color: var(--bg-dark-2);
-    border-right: 1px solid var(--accent-gold);
-    position: sticky;
-    top: var(--header-height);
-    align-self: start;
-    height: calc(100vh - var(--header-height));
-    overflow-y: auto;
-}
-
-.barra-list {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    list-style: none;
-}
-
-.barra-list li {
-    height: 50px;
-    display: flex;
-    transition: border-bottom 0.3s ease;
-    border-bottom: 1px solid #798792;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Efecto de brillo deslizante */
-.barra-list li::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        rgba(255, 255, 255, 0.3),
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
-.barra-list li:hover {
-    background-color: var(--bg-dark-1);
-    border-bottom: 1px solid var(--accent-gold-hover);
-}
-
-.barra-list li:hover::before {
-    animation: shimmer 0.6s ease-out forwards;
-}
-
-@keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-.barra-list li a {
-    height: 50px;
-    width: 100%;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    color: rgb(197, 197, 197);
-    transition: color 0.3s ease;
-    font-weight: bold;
-}
-
-.barra-list li a:hover {
-    color: var(--accent-gold-hover);
-}
-
-#fondo {
-    grid-area: fondo;
-    background-image: url(images/wuwa/wallpaper.jpg);
-    background-size: cover;
-    background-position: 50% 42%;
-    border-bottom: 3px solid var(--accent-gold);
-    box-shadow: inset 0px 0px 350px #00000081;
-    position: sticky;
-    top: var(--header-height);
-    z-index: 900;
-}
-
-#centro {
-    display: flex;
-    flex-direction: column;
-    grid-area: centro;
-    padding: 20px 20px 100px 20px;
-    
-    /* Efecto Futurista: Color base + Rejilla Tech + Viñeta */
-    background-color: var(--bg-dark-1);
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        radial-gradient(circle at 50% 0%, rgba(211, 175, 77, 0.05) 0%, transparent 60%);
-    background-size: 40px 40px, 40px 40px, 100% 100%;
-}
-
-.personajes-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: 50px;
-}
-
-.personajes-info h1 {
-    color: var(--text-primary);
-    font-size: 3em;
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-.personajes-info span {
-    color: var(--text-secondary);
-    font-size: 1.2em;
-}
-
-.atributos {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #747474;
-    margin: 25px 75px 0px 75px;
-    padding-top: 50px;
-}
-
-.atributos img {
-    width: 80px;
-    height: 80px;
-}
-
-.character-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 25px 75px 0px 75px;
-}
-
-.character-list div {
-    width: 150px;
-    height: 180px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-}
-
-.character-list div:hover {
-    transform: scale(1.08);
-    z-index: 10;
-}
-
-.character-list div p {
-    height: 30px;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    font-size: 1em;
-    font-family: 'Orbitron', sans-serif;
-    box-shadow: inset 0px 5px 10px #00000098;
-    font-weight: bold;
-    padding-top: 5px;
-}
-
-.character-list div a {
-    text-decoration: none;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.footer {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--accent-gold);
-    align-items: center;
-    grid-area: footer;
-    background: var(--bg-dark-3);
-    padding-bottom: 20px;
-}
-
-.footer p {
-    color: rgb(117, 117, 117);
-    font-size: 1.1em;
-    margin: 20px 0px 0px 0px;
-    text-decoration: underline;
-}
-
-#otras-guias {
-    margin-top: 30px;
-    text-decoration: none;
-    color: rgb(218, 218, 218);
-}
-
-.otros {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.otros img {
-    width: 50px;
-    height: 50px;
-    border: 2px solid #000000;
-    border-radius: 25px;
-}
-
-.character-list #fusion {box-shadow: inset 0px 0px 15px #00000098, 5px 5px 10px #ff3e3e; transition: all 0.3s ease;}
-.character-list #glacio {box-shadow: inset 0px 0px 15px #00000098, 5px 5px 10px #4facfe; transition: all 0.3s ease;}
-.character-list #aero {box-shadow: inset 0px 0px 15px #00000098, 5px 5px 10px #33d9b2; transition: all 0.3s ease;}
-.character-list #electro {box-shadow: inset 0px 0px 15px #00000098, 5px 5px 10px #b56afe; transition: all 0.3s ease;}
-.character-list #espectro {box-shadow: inset 0px 0px 15px #00000098, 5px 5px 10px #ffd700; transition: all 0.3s ease;}
-.character-list #destruccion {box-shadow: inset 0px 0px 15px #00000098, 5px 5px 10px #ff4081; transition: all 0.3s ease;}
-
-#fusion {background-color: var(--color-fusion); border: 2px solid var(--borde-fusion);}
-#glacio {background-color: var(--color-glacio); border: 2px solid var(--borde-glacio);}
-#aero {background-color: var(--color-aero); border: 2px solid var(--borde-aero);}
-#electro {background-color: var(--color-electro); border: 2px solid var(--borde-electro);}
-#espectro {background-color: var(--color-espectro); border: 2px solid var(--borde-espectro);}
-#destruccion {background-color: var(--color-destruccion); border: 2px solid var(--borde-destruccion);}
-
-.character-list #fusion:hover {box-shadow: inset 0px 0px 25px #000000d0, 0px 0px 25px #ff3c3ce0;}
-.character-list #glacio:hover {box-shadow: inset 0px 0px 25px #000000d0, 0px 0px 25px #4facfee0;}
-.character-list #aero:hover {box-shadow: inset 0px 0px 25px #000000d0, 0px 0px 25px #33d9b2e0;}
-.character-list #electro:hover {box-shadow: inset 0px 0px 25px #000000d0, 0px 0px 25px #b56afee0;}
-.character-list #espectro:hover {box-shadow: inset 0px 0px 25px #000000d0, 0px 0px 25px #ffd700e0;}
-.character-list #destruccion:hover {box-shadow: inset 0px 0px 25px #000000d0, 0px 0px 25px #ff4081e0;}
-
-#fusion p {border-top: 2px solid var(--borde-fusion); color: var(--color-fusion-text);}
-#glacio p {border-top: 2px solid var(--borde-glacio); color: var(--color-glacio-text);}
-#aero p {border-top: 2px solid var(--borde-aero); color: var(--color-aero-text);}
-#electro p {border-top: 2px solid var(--borde-electro); color: var(--color-electro-text);}
-#espectro p {border-top: 2px solid var(--borde-espectro); color: var(--color-espectro-text);}
-#destruccion p {border-top: 2px solid var(--borde-destruccion); color: var(--color-destruccion-text);}
-
-#fusion-text {color: var(--color-fusion); text-shadow: 0px 0px 15px var(--color-fusion);}
-#glacio-text {color: var(--color-glacio); text-shadow: 0px 0px 15px var(--color-glacio);}
-#aero-text {color: var(--color-aero); text-shadow: 0px 0px 15px var(--color-aero);}
-#electro-text {color: var(--color-electro); text-shadow: 0px 0px 15px var(--color-electro);}
-#espectro-text {color: var(--color-espectro); text-shadow: 0px 0px 15px var(--color-espectro);}
-#destruccion-text {color: var(--color-destruccion); text-shadow: 0px 0px 15px var(--color-destruccion);}
-
-#fusion-img {filter: drop-shadow(0px 0px 10px var(--color-fusion));}
-#glacio-img {filter: drop-shadow(0px 0px 10px var(--color-glacio));}
-#aero-img {filter: drop-shadow(0px 0px 10px var(--color-aero));}
-#electro-img {filter: drop-shadow(0px 0px 10px var(--color-electro));}
-#espectro-img {filter: drop-shadow(0px 0px 10px var(--color-espectro));}
-#destruccion-img {filter: drop-shadow(0px 0px 10px var(--color-destruccion));}
-
-
-/* --- RESPONSIVE DESIGN (Moviles y Tablets) --- */
-@media (max-width: 768px) {
-    
-    
-
-    /* === HEADER === */
-    #menu {
-        padding: 8px;
-    }
-
-    #menu-list {
-        gap: 10px;
-        justify-content: center;
-    }
-
-    #menu-list img {
-        width: 40px;
-    }
-
-    /* === ESTRUCTURA PRINCIPAL === */
-    main {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 150px 1fr auto;
-        grid-template-areas:
-            "barra"
-            "fondo"
-            "centro"
-            "footer";
-    }
-
-    /* === BARRA LATERAL → BARRA SUPERIOR === */
-    .barra {
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 2px solid var(--accent-gold);
-        position: sticky;
-        top: var(--header-height);
-        z-index: 1000;
-        overflow-y: hidden;
-    }
-
-    .barra-list {
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 0;
-    }
-
-    .barra-list li {
-        flex: 0 0 auto;
-        border-bottom: none;
-        border-right: 1px solid #798792;
-    }
-
-    .barra-list li a {
-        width: auto;
-        padding: 0 20px;
-        justify-content: center;
-        font-size: 0.9em;
-    }
-
-    /* === FONDO === */
-    #fondo {
-        background-position: center;
-        position: relative;
-        top: 0;
-        height: 150px;
-    }
-
-    /* === CONTENIDO CENTRAL === */
-    #centro {
-        padding: 15px 10px 60px 10px;
-    }
-
-    .personajes-info {
-        margin-top: 30px;
-        margin-bottom: 15px;
-    }
-
-    .personajes-info h1 {
-        font-size: 1.8em;
-        text-align: center;
-    }
-    
-    .personajes-info span {
-        text-align: center;
-        font-size: 1em;
-        padding: 0 15px;
-    }
-
-    /* === ATRIBUTOS === */
-    .atributos {
-        margin: 20px 15px 0 15px;
-        padding-top: 30px;
-    }
-
-    .atributos img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .atributos h1 {
-        font-size: 1.5em;
-    }
-
-    /* === LISTA DE PERSONAJES === */
-    .character-list {
-        justify-content: center;
-        padding: 15px 10px;
-        gap: 20px;
-    }
-
-    .character-list div {
-        width: 120px;
-        height: 145px;
-    }
-
-    .character-list div p {
-        height: 25px;
-        font-size: 0.75em;
-        padding-top: 3px;
-    }
-
-    /* === FOOTER === */
-    .footer {
-        padding: 15px 10px 20px 10px;
-    }
-
-    .footer p {
-        font-size: 0.9em;
-        text-align: center;
-        padding: 0 10px;
-    }
-
-    #otras-guias {
-        margin-top: 20px;
-    }
-
-    .otros {
-        gap: 15px;
-    }
-
-    .otros img {
-        width: 40px;
-        height: 40px;
-    }
-}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gacha Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav id="menu">
+            <ul id="menu-list">
+                <li><a href="#WuWa"><img src="images/icons/wuthering_waves.png" alt="wuwaicon" id="wuwaicon"></a></li>
+                <li><a href="#HSR"><img src="images/icons/genshin_impact.png" alt="genshinicon" id="genshinicon"></a></li>
+                <li><a href="#GI"><img src="images/icons/honkai_star_rail.png" alt="honkaiicon" id="honkaiicon"></a></li>
+                <li><a href="#ZZZ"><img src="images/icons/zenless_zone_zero.png" alt="zenlessicon" id="zenlessicon"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="barra">
+            <ol class="barra-list">
+                <li><a href="#Personajes">Personajes</a></li>
+                <li><a href="#Armas">Armas</a></li>
+                <li><a href="#Ecos">Ecos</a></li>
+                <li><a href="#Info">Info</a></li>
+            </ol>
+        </section>
+        <section id="fondo">
+        </section>
+        <section id="centro">
+            <div class="personajes-info">
+                <h1>Personajes Jugables</h1>
+                <span>Aqui podras encontrar todos los personajes jugables de Wuthering Waves Actualmente</span>
+            </div>
+
+            <div class="atributos">
+                <img src="images/wuwa/atributos/fusion.png" alt="error" id="fusion-img">
+                <h1 id="fusion-text">Fusion</h1>
+            </div>
+            <div class="character-list">
+                <div id="fusion"><a href="#Changli">
+                    <img src="images/wuwa/personajes/changli.png" alt="error">
+                    <p>Changli</p>
+                </a></div>
+                <div id="fusion"><a href="#Brant">
+                    <img src="images/wuwa/personajes/brant.png" alt="error">
+                    <p>Brant</p>
+                </a></div>
+                <div id="fusion"><a href="#Aemeath">
+                    <img src="images/wuwa/personajes/aemeath.png" alt="error">
+                    <p>Aemeath</p>
+                </a></div>
+                <div id="fusion"><a href="#Encore">
+                    <img src="images/wuwa/personajes/encore.png" alt="error">
+                    <p>Encore</p>
+                </a></div>
+                <div id="fusion"><a href="#Lupa">
+                    <img src="images/wuwa/personajes/lupa.png" alt="error">
+                    <p>Lupa</p>
+                </a></div>
+                <div id="fusion"><a href="#Galbrena">
+                    <img src="images/wuwa/personajes/galbrena.png" alt="error">
+                    <p>Galbrena</p>
+                </a></div>
+                <div id="fusion"><a href="#Chixia">
+                    <img src="images/wuwa/personajes/chixia.png" alt="error">
+                    <p>Chixia</p>
+                </a></div>
+                <div id="fusion"><a href="#Mortefi">
+                    <img src="images/wuwa/personajes/mortefi.png" alt="error">
+                    <p>Mortefi</p>
+                </a></div>
+                
+            </div>
+
+            <div class="atributos">
+                <img src="images/wuwa/atributos/glacio.png" alt="error" id="glacio-img">
+                <h1 id="glacio-text">Glacio</h1>
+            </div>
+            <div class="character-list">
+                <div id="glacio"><a href="#Carlotta">
+                    <img src="images/wuwa/personajes/carlotta.png" alt="error">
+                    <p>Carlotta</p>
+                </a></div>
+                <div id="glacio"><a href="#Zhezhi">
+                    <img src="images/wuwa/personajes/zhezhi.png" alt="error">
+                    <p>Zhezhi</p>
+                </a></div>
+                <div id="glacio"><a href="#Lingyang">
+                    <img src="images/wuwa/personajes/lingyang.png" alt="error">
+                    <p>Lingyang</p>
+                </a></div>
+                <div id="glacio"><a href="#Sanhua">
+                    <img src="images/wuwa/personajes/sanhua.png" alt="error">
+                    <p>Sanhua</p>
+                </a></div>
+                <div id="glacio"><a href="#Youhu">
+                    <img src="images/wuwa/personajes/youhu.png" alt="error">
+                    <p>Youhu</p>
+                </a></div>
+                <div id="glacio"><a href="#Baizhi">
+                    <img src="images/wuwa/personajes/baizhi.png" alt="error">
+                    <p>Baizhi</p>
+                </a></div>
+            </div>
+
+            <div class="atributos">
+                <img src="images/wuwa/atributos/aero.png" alt="error" id="aero-img">
+                <h1 id="aero-text">Aero</h1>
+            </div>
+            <div class="character-list">
+                <div id="aero"><a href="#Rover">
+                    <img src="images/wuwa/personajes/rover.png" alt="error">
+                    <p>Rover</p>
+                </a></div>
+                <div id="aero"><a href="#Cartethyia">
+                    <img src="images/wuwa/personajes/cartethyia.png" alt="error">
+                    <p>Cartethyia</p>
+                </a></div>
+                <div id="aero"><a href="#Ciaccona">
+                    <img src="images/wuwa/personajes/ciaccona.png" alt="error">
+                    <p>Ciaccona</p>
+                </a></div>
+                <div id="aero"><a href="#Iuno">
+                    <img src="images/wuwa/personajes/iuno.png" alt="error">
+                    <p>Iuno</p>
+                </a></div>
+                <div id="aero"><a href="#Qiuyuan">
+                    <img src="images/wuwa/personajes/qiuyuan.png" alt="error">
+                    <p>Qiuyuan</p>
+                </a></div>
+                <div id="aero"><a href="#Jiyan">
+                    <img src="images/wuwa/personajes/jiyan.png" alt="error">
+                    <p>Jiyan</p>
+                </a></div>
+                <div id="aero"><a href="#Jianxin">
+                    <img src="images/wuwa/personajes/jianxin.png" alt="error">
+                    <p>Jianxin</p>
+                </a></div>
+                <div id="aero"><a href="#Yangyang">
+                    <img src="images/wuwa/personajes/yangyang.png" alt="error">
+                    <p>Yangyang</p>
+                </a></div>
+                <div id="aero"><a href="#Aalto">
+                    <img src="images/wuwa/personajes/aalto.png" alt="error">
+                    <p>Aalto</p>
+                </a></div>
+            </div>
+
+            <div class="atributos">
+                <img src="images/wuwa/atributos/electro.png" alt="error" id="electro-img">
+                <h1 id="electro-text">Electro</h1>
+            </div>
+            <div class="character-list">
+                <div id="electro"><a href="#Augusta">
+                    <img src="images/wuwa/personajes/augusta.png" alt="error">
+                    <p>Augusta</p>
+                </a></div>
+                <div id="electro"><a href="#Calcharo">
+                    <img src="images/wuwa/personajes/calcharo.png" alt="error">
+                    <p>Calcharo</p>
+                </a></div>
+                <div id="electro"><a href="#Xiangli-Yao">
+                    <img src="images/wuwa/personajes/xiangli-yao.png" alt="error">
+                    <p>Xxiangli Yao</p>
+                </a></div>
+                <div id="electro"><a href="#Yinlin">
+                    <img src="images/wuwa/personajes/yinlin.png" alt="error">
+                    <p>Yinlin</p>
+                </a></div>
+                <div id="electro"><a href="#Yuanwu">
+                    <img src="images/wuwa/personajes/yuanwu.png" alt="error">
+                    <p>Yuanwu</p>
+                </a></div>
+                <div id="electro"><a href="#Lumi">
+                    <img src="images/wuwa/personajes/lumi.png" alt="error">
+                    <p>Lumi</p>
+                </a></div>
+                <div id="electro"><a href="#Buling">
+                    <img src="images/wuwa/personajes/buling.png" alt="error">
+                    <p>Buling</p>
+                </a></div>
+            </div>
+
+            <div class="atributos">
+                <img src="images/wuwa/atributos/espectro.png" alt="error" id="espectro-img">
+                <h1 id="espectro-text">Espectro</h1>
+            </div>
+            <div class="character-list">
+                <div id="espectro"><a href="#Rover">
+                    <img src="images/wuwa/personajes/rover.png" alt="error">
+                    <p>Rover</p>
+                </a></div>
+                <div id="espectro"><a href="#Lynae">
+                    <img src="images/wuwa/personajes/lynae.png" alt="error">
+                    <p>Lynae</p>
+                </a></div>
+                <div id="espectro"><a href="#Zani">
+                    <img src="images/wuwa/personajes/zani.png" alt="error">
+                    <p>Zani</p>
+                </a></div>
+                <div id="espectro"><a href="#Verina">
+                    <img src="images/wuwa/personajes/verina.png" alt="error">
+                    <p>Verina</p>
+                </a></div>
+                <div id="espectro"><a href="#Shorekeeper">
+                    <img src="images/wuwa/personajes/shorekeeper.png" alt="error">
+                    <p>Shorekeeper</p>
+                </a></div>
+                <div id="espectro"><a href="#Phoebe">
+                    <img src="images/wuwa/personajes/phoebe.png" alt="error">
+                    <p>Phoebe</p>
+                </a></div>
+                <div id="espectro"><a href="#Jinhsi">
+                    <img src="images/wuwa/personajes/jinhsi.png" alt="error">
+                    <p>Jinhsi</p>
+                </a></div>
+            </div>
+
+            <div class="atributos">
+                <img src="images/wuwa/atributos/destruccion.png" alt="error" id="destruccion-img">
+                <h1 id="destruccion-text">Destruccion</h1>
+            </div>
+            <div class="character-list">
+                <div id="destruccion"><a href="#Rover">
+                    <img src="images/wuwa/personajes/rover.png" alt="error">
+                    <p>Rover</p>
+                </a></div>
+                <div id="destruccion"><a href="#Roccia">
+                    <img src="images/wuwa/personajes/roccia.png" alt="error">
+                    <p>Roccia</p>
+                </a></div>
+                <div id="destruccion"><a href="#Phrolova">
+                    <img src="images/wuwa/personajes/phrolova.png" alt="error">
+                    <p>Phrolova</p>
+                </a></div>
+                <div id="destruccion"><a href="#Camellya">
+                    <img src="images/wuwa/personajes/camellya.png" alt="error">
+                    <p>Camellya</p>
+                </a></div>
+                <div id="destruccion"><a href="#Cantarella">
+                    <img src="images/wuwa/personajes/cantarella.png" alt="error">
+                    <p>Cantarella</p>
+                </a></div>
+                <div id="destruccion"><a href="#Chisa">
+                    <img src="images/wuwa/personajes/chisa.png" alt="error">
+                    <p>Chisa</p>
+                </a></div>
+                <div id="destruccion"><a href="#Danjin">
+                    <img src="images/wuwa/personajes/danjin.png" alt="error">
+                    <p>Danjin</p>
+                </a></div>
+                <div id="destruccion"><a href="#Taoqi">
+                    <img src="images/wuwa/personajes/taoqi.png" alt="error">
+                    <p>Taoqi</p>
+                </a></div>
+            </div>
+        </section>
+        <footer class="footer">
+            <p>© 2026 Gacha Guide - Proyecto fan sin fines comerciales</p>
+            <p>Este sitio no está afiliado ni respaldado por Kuro Games. Todas las imágenes pertenecen a sus respectivos autores.</p>
+            <p id="otras-guias">Otras guias</p>
+            <nav class="otros">
+                <a href="#HSR"><img src="images/icons/honkai_star_rail.png" alt="error" id="honkaiicon"></a>
+                <a href="#GI"><img src="images/icons/genshin_impact.png" alt="error" id="genshinicon"></a>
+                <a href="#ZZZ"><img src="images/icons/zenless_zone_zero.png" alt="error" id="zenlessicon"></a>
+            </nav>
+        </footer>
+    </main>
+</body>
+
+</html>
