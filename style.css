@@ -1,5 +1,6 @@
 :root {
     --header-height: 75px;
+    --header-height2: 50px;
     
     /* Colores de Elementos Vibrantes (Estilo Juego) */
     --color-fusion: #ff4d5080;   /* Rojo Intenso */
@@ -63,15 +64,19 @@ header {
 }
 
 #menu {
+    height: 100%;
     padding: 10px;
     background-color: var(--bg-dark-3);
     border-bottom: 2px solid var(--accent-gold);
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #menu-list {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 20px;
     list-style: none;
 }
@@ -394,6 +399,8 @@ main {
 /* --- RESPONSIVE DESIGN (Moviles y Tablets) --- */
 @media (max-width: 768px) {
     
+    
+
     /* === HEADER === */
     #menu {
         padding: 8px;
